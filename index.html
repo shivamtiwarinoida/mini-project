@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        *{
+            margin : 0 px;
+            padding:0 px;
+            box-sizing:border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        body{
+            background-color: aqua;
+        }
+
+        .container{
+            height:100vh;
+            width:100vw;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .button-container{
+            background: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .btn{
+            background:none;
+            outline:none;
+            border-radius: 10px;
+            padding: 10px;
+            margin:5px;
+            cursor: pointer;
+        }
+
+        .btn:hover{
+            background-color: black;
+            color: white;
+        }
+
+        span{
+            font-size: 100px;
+            padding: 10px;
+        }
+        
+        .navbar ul{
+            display:flex;
+            list-style: none;
+            color:white;
+            background-color: blue;
+            cursor: pointer;
+            margin:20px;
+            padding: 20px;
+            justify-content:space-around;
+            text-align: center;
+            border-radius: 8px;
+
+        }
+
+        .navbar ul li{
+            padding: 6px;
+            margin: 6px;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .clock{
+            display: flex;
+            justify-content: center;
+        }
+
+        .clock1{
+            background-color: white;
+            color: rgb(58, 1, 1);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .clock1:hover{
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body onload="showTime()">
+    <nav class="navbar">
+        <ul>
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Contact Us</li>
+        </ul>
+
+    </nav>
+
+    <div class="container">
+        <h1>Counter</h1>
+        <span id="value">0</span>
+
+        <div class="button-container">
+            <button id="increase" class="btn" onclick="increase()">Increase</button>
+            <button id="reset" class="btn" onclick="reset()">Reset</button>
+            <button id="decrease"class="btn" onclick="decrease()">Decrease</button>
+        </div>
+    </div>
+
+    <div class="clock">
+        <span class="clock1" id="cl1">clock</span>
+    </div>
+    <script>
+        
+        const values=document.getElementById("value");
+        const Increase=document.getElementById("increse");
+        const Decrease=document.getElementById("decrease");
+        const btns=document.querySelectorAll(".btn");
+        values.textContent=23;
+        let count=0;
+        document.getElementById("value").innerText=count;
+
+        console.log(btns);
+        console.log(values);
+        function increase() {
+            count=count+1;
+            document.getElementById("value").innerText=count;
+        }
+        function decrease(){
+            count=count-1;
+            document.getElementById("value").innerText=count;
+        }
+        function reset(){
+            count=0;
+            document.getElementById("value").innerText=count;
+        }
+        
+
+        const getcolor=()=>{
+            const rn=Math.floor(Math.random()*16777215);
+            console.log(rn);
+            const rc="#"+rn.toString(16);
+            document.body.style.backgroundColor=rc;
+        }
+
+        document.getElementById('increase').addEventListener(
+            "click",
+            getcolor
+        )
+        
+        document.getElementById('decrease').addEventListener(
+            "click",
+            getcolor
+        )
+        
+        document.getElementById('reset').addEventListener(
+            "click",
+            getcolor
+        )
+        getcolor();
+
+        function showTime(){
+            let d=new Date;
+            let h=d.getHours();
+            let m=d.getMinutes();
+            let s=d.getSeconds();
+            let sess= "AM";
+            if(h>12){
+                sess="PM";
+            }
+
+            
+            h = h<10 ? "0"+h : h;
+            m = m<10 ? "0"+m : m;
+            s = s<10 ? "0"+s :s;
+
+            let time=h+" : "+m+" : "+s+ " "+sess;            
+            document.getElementById("cl1").innerText = time;
+            setTimeout(showTime,1000);
+            
+        }
+
+    </script>
+</body>
+</html>
